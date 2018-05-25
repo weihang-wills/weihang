@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 
-public class slider2 : MonoBehaviour {   //对比slider.cs中的写法，进度条更加平滑
+public class slider2 : MonoBehaviour {   
 
     public Slider m_slider;
     private AsyncOperation operation;
@@ -26,8 +26,8 @@ public class slider2 : MonoBehaviour {   //对比slider.cs中的写法，进度�
     IEnumerator Loadscene(int sceneIndex)
     {
         operation = SceneManager.LoadSceneAsync(sceneIndex);
-        operation.allowSceneActivation = false;
-                
+        operation.allowSceneActivation = false;//加载完成不立刻切换过去，而是等待进度条完成再切换，这比slider.cs中的进度条要平滑
+
         yield return operation;
 
 
@@ -69,7 +69,7 @@ public class slider2 : MonoBehaviour {   //对比slider.cs中的写法，进度�
 
         if (nowprocess == 100)
         {
-            operation.allowSceneActivation = true;
+            operation.allowSceneActivation = true;//加载完成不立刻切换过去，而是等待进度条完成再切换
 
         }
        
