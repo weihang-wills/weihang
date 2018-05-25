@@ -42,7 +42,7 @@ public class slider : MonoBehaviour {
 
         if (operation.isDone == false)
         {
-            progress = Mathf.Clamp01(operation.progress / 0.9f);   //progress取值区间，最大值为0.9f,为加载成功
+            progress = Mathf.Clamp01(operation.progress / 0.9f);   //progress取值区间，最大值为0.9f,为加载成功,所以这是一个百分比float值 ; Clamps value between 0 and 1 and returns value
 
             m_slider.value = progress;
 
