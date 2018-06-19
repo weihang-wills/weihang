@@ -16,6 +16,8 @@ public class blood : MonoBehaviour {
     public GameObject blooddecline;
     public GameObject baoji;
     public GameObject baojikouxue;
+    public GameObject shengmingtext;
+    private Text test3 = shengmingtext.GetComponent<Text>();
     private Text test;
     private Text test1;
     public GameObject shengli;
@@ -23,8 +25,10 @@ public class blood : MonoBehaviour {
         
     private bool move;
     private bool move1;
+    private bool antifightmove;
     private Vector3 vv;
     private Vector3 vv1;
+    private Vector3 vv3;
 
 
 
@@ -50,13 +54,18 @@ public class blood : MonoBehaviour {
         move1 = false;
         test.CrossFadeAlpha(0, 0, true);//初始透明度
         test1.CrossFadeAlpha(0, 0, true);
-        
+        test3.CrossFadeAlpha(0, 0, true);
+
 
         Transform trans = blooddecline.GetComponent<Transform>();
         vv = trans.position;//获取初始位置
 
         Transform trans1 =baojikouxue.GetComponent<Transform>();
         vv1 = trans1.position;
+
+        Transform trans3 = shengmingtext.GetComponent<Transform>();
+        vv3 = trans3.position;
+
 
          
     
@@ -113,6 +122,18 @@ public class blood : MonoBehaviour {
             ren.material.color = c;
         }
 
+        if (antifightmove == true)
+        {
+            Transform trans3 = shengmingtext.GetComponent<Transform>();
+            trans3.translate(new Vector3(1, 3, 0) * 0.1f * Time.deltatime);
+            
+        }
+        else
+        {
+            Transform trans3 = shengmingtext.GetComponent<Transform>();
+            trans3.position = vv3;
+        }
+
         if (bloodline <= 0)
         {
             shengli.SetActive(true);
@@ -130,7 +151,8 @@ public class blood : MonoBehaviour {
         {
             move = true;
             Invoke("movebool", 0.5f);//延时0.5s执行movebool
-            
+            invoke("antifight", 1f);
+
 
             bloodline = bloodline - 10;
             
@@ -139,18 +161,12 @@ public class blood : MonoBehaviour {
             /*Component[] comps = blooddecline.GetComponentsInChildren<Component>();//局部变量
             foreach (Component c in comps)
                             {
+                   
                 if (c is Graphic)
                 {
                   (c as Graphic).CrossFadeAlpha(0, duration: 5/10f, ignoreTimeScale: false); //只针对graphic才能有这个淡出效果，（目标alpha，淡出时间，bool)
-                }
-
+                }              
             
-
-               
-                
-               
-
-
             }*/
             test.CrossFadeAlpha(0, 0.5f, true);
 
@@ -172,7 +188,7 @@ public class blood : MonoBehaviour {
 
             move1 = true;
             Invoke("movebool1", 0.5f);//延时0.5s执行movebool
-
+            invoke("antifight", 1f);
 
             
 
@@ -200,6 +216,27 @@ public class blood : MonoBehaviour {
        
 
     }
+    public void antifight()
+    {
+
+        if (shengmingline > 0)
+        {
+            antifightmove = true;
+            invoke("antimove", 0.5f);
+
+            shengmingline - 5;
+
+            test3.CrossFadeAlpha(100, 0, true);
+            test3.CrossFadeAlpha(0, 0.5f, true);
+
+
+        }
+       
+
+
+
+
+    }
     void movebool()
     {
         move = false;
@@ -211,6 +248,10 @@ public class blood : MonoBehaviour {
     void baojimove()
     {
         baoji.SetActive(false);
+    }
+    void antimove()
+    {
+        antifightmove = false;
     }
     public void huifuxuetiao()
     {
