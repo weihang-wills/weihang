@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class flowerdrop : MonoBehaviour {
 
     public Animator flowersdrop;
     public GameObject flower;
+     
 
 
 	// Use this for initialization
@@ -20,7 +22,7 @@ public class flowerdrop : MonoBehaviour {
         if (info.normalizedTime >= 1.0f)
         {
             flower.SetActive(false);
-            Invoke("bofang",20f);
+            Invoke("bofang",5f);
         }
         
 		
@@ -30,25 +32,23 @@ public class flowerdrop : MonoBehaviour {
     {
         flower.SetActive(true);
 
-        /*flowersdrop.Play("flowerdrop",0，normalizedTime);
-        flowersdrop.enabled = true;*/
-
-
-        float recordtime = flowersdrop.playbackTime;//记录一个进度时间点
-        flowersdrop.StartPlayback();//在这个进度时间点停下来（相当于暂停）
-
-        flowersdrop.StopPlayback();//退出这个模式（继续播放）
-
-        
-
-        
+        /*
+        flowersdrop.enabled = false;  动画机的开启/关闭状态
+        flowersdrop.enabled = true;
+        flowersdrop.Play("flowerdrop",0,0.8f);Play(string "动画状态",int layer（动画状态所在层）,float normalizedTime）  */
 
 
 
 
 
 
-    
+
+
+
+
+
+
+
 
 
     }
